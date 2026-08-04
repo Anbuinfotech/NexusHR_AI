@@ -1,0 +1,6 @@
+{
+  "name": "NexusHR AI - Enterprise HR Platform",
+  "description": "Production-level AI-Powered Employee Management & HR Analytics Platform with JWT auth, RBAC, AI resume analyzer, and performance feedback generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
