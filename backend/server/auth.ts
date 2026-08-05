@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { Role, User } from '../src/types.js';
+import { Role, User } from '../types.js';
 import { users } from './db.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-jwt-token-key-2026-enterprise-hr';

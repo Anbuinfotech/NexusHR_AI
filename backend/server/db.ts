@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { User, Employee, Department, Attendance, LeaveRequest, PerformanceReview } from '../src/types.js';
+import { User, Employee, Department, Attendance, LeaveRequest, PerformanceReview } from '../types.js';
 
 // Pre-seeded Hash for "password123"
 const DEFAULT_PASSWORD_HASH = bcrypt.hashSync('password123', 10);

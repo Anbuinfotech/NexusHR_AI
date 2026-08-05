@@ -3,19 +3,16 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import bcrypt from 'bcryptjs';
-import { createServer as createViteServer } from 'vite';
 import { users, userPasswords, employees, departments, attendanceRecords, leaveRequests, performanceReviews } from './server/db.js';
 import { generateToken, authenticateToken, requireRoles, AuthenticatedRequest } from './server/auth.js';
 import { analyzeResume, generatePerformanceFeedback } from './server/gemini.js';
 import { swaggerSpec } from './server/swagger.js';
-import { User, Employee, Department, Attendance, LeaveRequest, PerformanceReview } from './src/types.js';
+import { User, Employee, Department, Attendance, LeaveRequest, PerformanceReview } from './types.js';
 
-
-
+const PORT = Number(process.env.PORT || 3001);
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
 
   app.use(cors());
   app.use(express.json({ limit: '10mb' }));
@@ -551,23 +548,16 @@ async function startServer() {
     return res.json(swaggerSpec);
   });
 
-  // Vite middleware for development vs static build for production
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-  }
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Backend API server running on http://0.0.0.0:${PORT}`);
+  });
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
+  server.on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use. Try stopping the process using that port or set a different PORT in .env.`);
+      process.exit(1);
+    }
+    throw err;
   });
 }
 

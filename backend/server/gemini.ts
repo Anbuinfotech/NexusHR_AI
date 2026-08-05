@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from '@google/genai';
-import { ResumeAnalysisResult, AiPerformanceAnalysisResult } from '../src/types.js';
+import { ResumeAnalysisResult, AiPerformanceAnalysisResult } from '../types.js';
 
 // Initialize Gemini Client server-side with user-agent telemetry header
 const ai = new GoogleGenAI({

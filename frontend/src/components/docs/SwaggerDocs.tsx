@@ -77,7 +77,7 @@ export const SwaggerDocs: React.FC = () => {
         </div>
 
         <pre className="bg-slate-950 p-4 rounded-2xl overflow-x-auto text-[11px] font-mono text-emerald-400 border border-slate-800 shadow-inner">
-{`curl -X POST http://localhost:3000/api/ai/resume-analyze \\
+{`curl -X POST http://localhost:3001/api/ai/resume-analyze \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \\
   -d '{

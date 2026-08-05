@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx server.ts",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "dev:frontend": "cd frontend && vite",
+    "dev:backend": "cd backend && tsx server.ts",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build": "cd frontend && vite build && esbuild backend/server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
-    "preview": "vite preview",
+    "preview": "cd frontend && vite preview",
     "clean": "rm -rf dist server.cjs",
     "lint": "tsc --noEmit"
   },
@@ -34,6 +36,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.0",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",

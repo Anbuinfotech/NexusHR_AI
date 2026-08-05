@@ -11,7 +11,7 @@ import {
   DashboardStats,
 } from '../types.js';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 
 export function getAuthToken(): string | null {
   return localStorage.getItem('jwt_token');
